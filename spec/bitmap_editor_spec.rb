@@ -12,4 +12,24 @@ RSpec.describe 'BitmapEditor' do
       expect { editor.run }.to output(/goodbye/).to_stdout
     end
   end
+
+  describe '#parse_input' do
+    context 'with command "?" given' do
+      it 'shows the help message' do
+        editor = BitmapEditor.new
+        expect(editor).to receive(:show_help).once
+
+        editor.parse_input('?')
+      end
+    end
+
+    context 'with command "X" given' do
+      it 'exits the program' do
+        editor = BitmapEditor.new
+        expect(editor).to receive(:exit_console).once
+
+        editor.parse_input('X')
+      end
+    end
+  end
 end
