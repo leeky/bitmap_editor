@@ -10,7 +10,9 @@ class BitmapEditor
   end
 
   def parse_input(input = gets.chomp)
-    case input
+    command, *params = input.upcase.strip.split(' ')
+
+    case command
     when '?'
       show_help
     when 'X'

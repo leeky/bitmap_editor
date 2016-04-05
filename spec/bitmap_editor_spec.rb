@@ -31,5 +31,14 @@ RSpec.describe 'BitmapEditor' do
         editor.parse_input('X')
       end
     end
+
+    context 'with a lowercased command given' do
+      it 'cleans up the command input and parses it normally' do
+        editor = BitmapEditor.new
+        expect(editor).to receive(:exit_console).once
+
+        editor.parse_input('   x   ')
+      end
+    end
   end
 end
