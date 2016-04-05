@@ -1,4 +1,6 @@
 class BitmapEditor
+  attr_reader :width, :height, :image
+
   def run
     @running = true
     puts 'type ? for help'
@@ -13,6 +15,8 @@ class BitmapEditor
     command, *params = input.upcase.strip.split(' ')
 
     case command
+    when 'I'
+      create_image!(params[0], params[1])
     when '?'
       show_help
     when 'X'
@@ -23,6 +27,13 @@ class BitmapEditor
   end
 
   private
+
+  def create_image!(width, height)
+    @width = Integer(width)
+    @height = Integer(height)
+
+    @image = Array.new(@height) { Array.new(@width, 'O') }
+  end
 
   def exit_console
     puts 'goodbye!'
