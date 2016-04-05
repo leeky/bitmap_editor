@@ -17,6 +17,8 @@ class BitmapEditor
     case command
     when 'I'
       create_image!(params[0], params[1])
+    when 'L'
+      set_pixel(params[0], params[1], params[2])
     when '?'
       show_help
     when 'X'
@@ -33,6 +35,13 @@ class BitmapEditor
     @height = Integer(height)
 
     @image = Array.new(@height) { Array.new(@width, 'O') }
+  end
+
+  def set_pixel(x, y, colour)
+    px = Integer(x) - 1
+    py = Integer(y) - 1
+
+    @image[py][px] = colour
   end
 
   def exit_console

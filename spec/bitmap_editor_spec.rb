@@ -23,10 +23,22 @@ RSpec.describe 'BitmapEditor' do
         expect(editor.width).to eql 4
         expect(editor.height).to eql 2
 
-        expected_image =  [%w(O O O O)]
-        expected_image += [%w(O O O O)]
+        expected_image =  [%w(O O O O), %w(O O O O)]
 
         expect(editor.image).to eql expected_image
+      end
+    end
+
+    context 'when colouring a pixel with the "L" command' do
+      it 'sets the relevant pixel to the given colour' do
+        editor = BitmapEditor.new
+        editor.parse_input('I 3 3')
+
+        editor.parse_input('L 2 2 A') # middle pixel
+        editor.parse_input('L 1 3 B') # bottom-left pixel
+
+        expected_image = [%w(O O O), %w(O A O), %w(B O O)]
+        expect(editor.image).to eql  expected_image
       end
     end
 
