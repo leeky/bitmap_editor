@@ -51,6 +51,17 @@ RSpec.describe 'BitmapEditor' do
       end
     end
 
+    context 'with command "C" given' do
+      it 'clears the image' do
+        editor = BitmapEditor.new
+        editor.parse_input('I 1 1')
+
+        expect(editor.image).to receive(:clear!).once
+
+        editor.parse_input('C')
+      end
+    end
+
     context 'with command "?" given' do
       it 'shows the help message' do
         editor = BitmapEditor.new

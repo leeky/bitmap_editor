@@ -20,6 +20,19 @@ RSpec.describe 'Image' do
     end
   end
 
+  describe '#clear!' do
+    it 'clears the image' do
+      image = Image.new(2, 2)
+
+      image.set_pixel(1, 1, 'A')
+      image.set_pixel(2, 2, 'B')
+
+      image.clear!
+
+      expect(image.to_s).to eql "OO\nOO\n"
+    end
+  end
+
   describe '#to_s' do
     it 'formats the image so it can be displayed in the console' do
       image = Image.new(3, 3)

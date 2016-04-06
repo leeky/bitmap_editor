@@ -19,6 +19,8 @@ class BitmapEditor
     case command
     when 'I'
       @image = Image.new(params[0], params[1])
+    when 'C'
+      @image.clear!
     when 'L'
       @image.set_pixel(params[0], params[1], params[2])
     when 'S'

@@ -15,6 +15,10 @@ class Image
     @image[py][px] = colour
   end
 
+  def clear!
+    @image = Array.new(@height) { Array.new(@width, 'O') }
+  end
+
   def to_s
     @image.map{ |row| row.join }.join("\n") + "\n"
   end
