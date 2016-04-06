@@ -20,12 +20,12 @@ RSpec.describe 'BitmapEditor' do
 
         editor.parse_input('I 4 2')
 
-        expect(editor.width).to eql 4
-        expect(editor.height).to eql 2
+        expect(editor.image.width).to eql 4
+        expect(editor.image.height).to eql 2
 
-        expected_image =  [%w(O O O O), %w(O O O O)]
+        expected_image =  "OOOO\nOOOO"
 
-        expect(editor.image).to eql expected_image
+        expect(editor.image.to_s).to eql expected_image
       end
     end
 
@@ -37,8 +37,8 @@ RSpec.describe 'BitmapEditor' do
         editor.parse_input('L 2 2 A') # middle pixel
         editor.parse_input('L 1 3 B') # bottom-left pixel
 
-        expected_image = [%w(O O O), %w(O A O), %w(B O O)]
-        expect(editor.image).to eql  expected_image
+        expected_image = "OOO\nOAO\nBOO"
+        expect(editor.image.to_s).to eql expected_image
       end
     end
 

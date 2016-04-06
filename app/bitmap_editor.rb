@@ -1,5 +1,7 @@
+require_relative './image'
+
 class BitmapEditor
-  attr_reader :width, :height, :image
+  attr_reader :image
 
   def run
     @running = true
@@ -16,9 +18,9 @@ class BitmapEditor
 
     case command
     when 'I'
-      create_image!(params[0], params[1])
+      @image = Image.new(params[0], params[1])
     when 'L'
-      set_pixel(params[0], params[1], params[2])
+      @image.set_pixel(params[0], params[1], params[2])
     when '?'
       show_help
     when 'X'
@@ -29,20 +31,6 @@ class BitmapEditor
   end
 
   private
-
-  def create_image!(width, height)
-    @width = Integer(width)
-    @height = Integer(height)
-
-    @image = Array.new(@height) { Array.new(@width, 'O') }
-  end
-
-  def set_pixel(x, y, colour)
-    px = Integer(x) - 1
-    py = Integer(y) - 1
-
-    @image[py][px] = colour
-  end
 
   def exit_console
     puts 'goodbye!'
