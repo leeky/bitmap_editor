@@ -16,6 +16,6 @@ class Image
   end
 
   def to_s
-    @image.map!{ |row| row.join }.join("\n")
+    @image.map{ |row| row.join }.join("\n") + "\n"
   end
 end

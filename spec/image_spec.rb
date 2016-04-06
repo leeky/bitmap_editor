@@ -5,7 +5,7 @@ RSpec.describe 'Image' do
     it 'creates a new image with the given size' do
       image = Image.new(5, 5)
 
-      expect(image.to_s).to eql "OOOOO\nOOOOO\nOOOOO\nOOOOO\nOOOOO"
+      expect(image.to_s).to eql "OOOOO\nOOOOO\nOOOOO\nOOOOO\nOOOOO\n"
     end
   end
 
@@ -16,7 +16,7 @@ RSpec.describe 'Image' do
       image.set_pixel(2, 2, 'A') # Middle pixel
       image.set_pixel(1, 3, 'B') # Bottom-left pixel
 
-      expect(image.to_s).to eql "OOO\nOAO\nBOO"
+      expect(image.to_s).to eql "OOO\nOAO\nBOO\n"
     end
   end
 
@@ -24,7 +24,7 @@ RSpec.describe 'Image' do
     it 'formats the image so it can be displayed in the console' do
       image = Image.new(3, 3)
 
-      expect(image.to_s).to eql "OOO\nOOO\nOOO"
+      expect(image.to_s).to eql "OOO\nOOO\nOOO\n"
     end
   end
 end

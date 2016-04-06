@@ -21,6 +21,8 @@ class BitmapEditor
       @image = Image.new(params[0], params[1])
     when 'L'
       @image.set_pixel(params[0], params[1], params[2])
+    when 'S'
+      puts @image.to_s
     when '?'
       show_help
     when 'X'

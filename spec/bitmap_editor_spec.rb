@@ -23,7 +23,7 @@ RSpec.describe 'BitmapEditor' do
         expect(editor.image.width).to eql 4
         expect(editor.image.height).to eql 2
 
-        expected_image =  "OOOO\nOOOO"
+        expected_image = "OOOO\nOOOO\n"
 
         expect(editor.image.to_s).to eql expected_image
       end
@@ -37,8 +37,17 @@ RSpec.describe 'BitmapEditor' do
         editor.parse_input('L 2 2 A') # middle pixel
         editor.parse_input('L 1 3 B') # bottom-left pixel
 
-        expected_image = "OOO\nOAO\nBOO"
+        expected_image = "OOO\nOAO\nBOO\n"
         expect(editor.image.to_s).to eql expected_image
+      end
+    end
+
+    context 'with command "S" given' do
+      it 'displays the bitmap in the console' do
+        editor = BitmapEditor.new
+        editor.parse_input('I 5 2')
+
+        expect { editor.parse_input('S') }.to output("OOOOO\nOOOOO\n").to_stdout
       end
     end
 
