@@ -18,14 +18,19 @@ class BitmapEditor
 
     case command
     when 'I'
+      return unless is_integer?(params[0]) && is_integer?(params[1])
+
       @image = Image.new(params[0], params[1])
     when 'C'
       @image.clear!
     when 'L'
+      return unless is_integer?(params[0]) && is_integer?(params[1]) && is_letter?(params[2])
       @image.set_pixel(params[0], params[1], params[2])
     when 'V'
+      return unless is_integer?(params[0]) && is_integer?(params[1]) && is_integer?(params[2]) && is_letter?(params[3])
       @image.set_vertical_segment(params[0], params[1], params[2], params[3])
     when 'H'
+      return unless is_integer?(params[0]) && is_integer?(params[1]) && is_integer?(params[2]) && is_letter?(params[3])
       @image.set_horizontal_segment(params[0], params[1], params[2], params[3])
     when 'S'
       puts @image.to_s
@@ -50,6 +55,14 @@ class BitmapEditor
         value
       end
     end
+  end
+
+  def is_letter?(input)
+    input.scan(/[A-Z]/).size == 1
+  end
+
+  def is_integer?(input)
+    input.to_i == input
   end
 
   def exit_console

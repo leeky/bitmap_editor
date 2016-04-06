@@ -5,6 +5,12 @@ class Image
     @width = Integer(width)
     @height = Integer(height)
 
+    @width = 1 if @width < 1
+    @height = 1 if @height < 1
+
+    @width = 250 if @width > 250
+    @height = 250 if @height > 250
+
     @image = Array.new(@height) { Array.new(@width, 'O') }
   end
 

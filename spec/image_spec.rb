@@ -9,6 +9,25 @@ RSpec.describe 'Image' do
       expect(image.width).to eql 5
       expect(image.height).to eql 5
     end
+
+    it 'restricts the maximum width to 250' do
+      image = Image.new(251, 5)
+
+      expect(image.width).to eql 250
+    end
+
+    it 'restricts the maximum height to 250' do
+      image = Image.new(1, 251)
+
+      expect(image.height).to eql 250
+    end
+
+    it 'prevents negative-sized images from being created' do
+      image = Image.new(-4, -2)
+
+      expect(image.width).to eql 1
+      expect(image.height).to eql 1
+    end
   end
 
   describe '#set_pixel' do
