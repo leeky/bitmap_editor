@@ -29,16 +29,47 @@ RSpec.describe 'BitmapEditor' do
       end
     end
 
+    context 'with command "C" given' do
+      it 'clears the image' do
+        editor = BitmapEditor.new
+        editor.parse_input('I 1 1')
+
+        expect(editor.image).to receive(:clear!).once
+
+        editor.parse_input('C')
+      end
+    end
+
     context 'when colouring a pixel with the "L" command' do
-      it 'sets the relevant pixel to the given colour' do
+      it 'calls set_pixel on the image' do
         editor = BitmapEditor.new
         editor.parse_input('I 3 3')
 
-        editor.parse_input('L 2 2 A') # middle pixel
-        editor.parse_input('L 1 3 B') # bottom-left pixel
+        expect(editor.image).to receive(:set_pixel).with(2, 2, 'A').once
 
-        expected_image = "OOO\nOAO\nBOO\n"
-        expect(editor.image.to_s).to eql expected_image
+        editor.parse_input('L 2 2 A') # middle pixel
+      end
+    end
+
+    context 'when colouring a vertical segment with the "V" command' do
+      it 'calls set_vertical_segment on the image' do
+        editor = BitmapEditor.new
+        editor.parse_input('I 4 4')
+
+        expect(editor.image).to receive(:set_vertical_segment).with(1, 2, 3, 'A').once
+
+        editor.parse_input('V 1 2 3 A')
+      end
+    end
+
+    context 'when colouring a horizontal segment with the "H" command' do
+      it 'calls set_horizontal_segment on the image' do
+        editor = BitmapEditor.new
+        editor.parse_input('I 4 4')
+
+        expect(editor.image).to receive(:set_horizontal_segment).with(1, 4, 3, 'B').once
+
+        editor.parse_input('H 1 4 3 B')
       end
     end
 
@@ -48,17 +79,6 @@ RSpec.describe 'BitmapEditor' do
         editor.parse_input('I 5 2')
 
         expect { editor.parse_input('S') }.to output("OOOOO\nOOOOO\n").to_stdout
-      end
-    end
-
-    context 'with command "C" given' do
-      it 'clears the image' do
-        editor = BitmapEditor.new
-        editor.parse_input('I 1 1')
-
-        expect(editor.image).to receive(:clear!).once
-
-        editor.parse_input('C')
       end
     end
 

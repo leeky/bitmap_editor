@@ -14,7 +14,7 @@ class BitmapEditor
   end
 
   def parse_input(input = gets.chomp)
-    command, *params = input.upcase.strip.split(' ')
+    command, *params = cleanup(input)
 
     case command
     when 'I'
@@ -23,6 +23,10 @@ class BitmapEditor
       @image.clear!
     when 'L'
       @image.set_pixel(params[0], params[1], params[2])
+    when 'V'
+      @image.set_vertical_segment(params[0], params[1], params[2], params[3])
+    when 'H'
+      @image.set_horizontal_segment(params[0], params[1], params[2], params[3])
     when 'S'
       puts @image.to_s
     when '?'
@@ -35,6 +39,18 @@ class BitmapEditor
   end
 
   private
+
+  def cleanup(input)
+    input = input.upcase.strip.split(' ')
+
+    input.map! do |value|
+      if value.to_i.to_s == value
+        Integer(value)
+      else
+        value
+      end
+    end
+  end
 
   def exit_console
     puts 'goodbye!'

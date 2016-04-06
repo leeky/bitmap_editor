@@ -9,10 +9,18 @@ class Image
   end
 
   def set_pixel(x, y, colour)
-    px = Integer(x) - 1
-    py = Integer(y) - 1
+    px = x - 1
+    py = y - 1
 
     @image[py][px] = colour
+  end
+
+  def set_vertical_segment(x, y1, y2, colour)
+    (y1..y2).each {|y| set_pixel(x, y, colour) }
+  end
+
+  def set_horizontal_segment(x1, x2, y, colour)
+    (x1..x2).each {|x| set_pixel(x, y, colour) }
   end
 
   def clear!

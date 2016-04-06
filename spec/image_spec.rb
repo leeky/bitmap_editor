@@ -20,6 +20,29 @@ RSpec.describe 'Image' do
     end
   end
 
+  describe '#set_vertical_segment' do
+    it 'sets all pixels in the segment to the given colour' do
+      image = Image.new(4, 4)
+
+      image.set_vertical_segment(1, 1, 4, 'S')
+      image.set_vertical_segment(3, 2, 3, 'T')
+
+      expected_image = "SOOO\nSOTO\nSOTO\nSOOO\n"
+      expect(image.to_s).to eql expected_image
+    end
+  end
+
+  describe '#set_horizontal_segment' do
+    it 'sets all pixels in the segment to the given colour' do
+      image = Image.new(4, 4)
+
+      image.set_horizontal_segment(1, 4, 3, 'A')
+
+      expected_image = "OOOO\nOOOO\nAAAA\nOOOO\n"
+      expect(image.to_s).to eql expected_image
+    end
+  end
+
   describe '#clear!' do
     it 'clears the image' do
       image = Image.new(2, 2)
