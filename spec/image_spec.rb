@@ -6,6 +6,8 @@ RSpec.describe 'Image' do
       image = Image.new(5, 5)
 
       expect(image.to_s).to eql "OOOOO\nOOOOO\nOOOOO\nOOOOO\nOOOOO\n"
+      expect(image.width).to eql 5
+      expect(image.height).to eql 5
     end
   end
 
@@ -17,6 +19,17 @@ RSpec.describe 'Image' do
       image.set_pixel(1, 3, 'B') # Bottom-left pixel
 
       expect(image.to_s).to eql "OOO\nOAO\nBOO\n"
+    end
+
+    it 'ignores pixels that are outside of the image bounds' do
+      image = Image.new(3, 3)
+
+      image.set_pixel(0, 0, 'A')
+      image.set_pixel(4, 0, 'A')
+      image.set_pixel(0, 4, 'A')
+      image.set_pixel(-1, -1, 'A')
+
+      expect(image.to_s).to eql "OOO\nOOO\nOOO\n"
     end
   end
 

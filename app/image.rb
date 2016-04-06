@@ -9,6 +9,8 @@ class Image
   end
 
   def set_pixel(x, y, colour)
+    return unless valid?(x, y)
+
     px = x - 1
     py = y - 1
 
@@ -29,5 +31,11 @@ class Image
 
   def to_s
     @image.map{ |row| row.join }.join("\n") + "\n"
+  end
+
+  private
+
+  def valid?(x, y)
+    x >= 1 && x <= self.width && y >= 1 && y <= self.height
   end
 end
